@@ -8,22 +8,61 @@ To write a program to implement the K Means Clustering for Customer Segmentation
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1.Import the necessary packages using import statement. 
+2.Read the given csv file using read_csv() method and print the number of contents to be displayed using df.head().
+3.Import KMeans and use for loop to cluster the data. 
+4.Predict the cluster and plot data graphs. 
+5.Print the outputs and end the program
 
 ## Program:
 ```
 /*
 Program to implement the K Means Clustering for Customer Segmentation.
-Developed by: 
-RegisterNumber:  
+Developed by: Vasanthi Sivasankar
+RegisterNumber:  212223040234
 */
+```
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+data=pd.read_csv("Mall_Customers.csv")
+data.head()
+data.info()
+data.isnull().sum()
+from sklearn.cluster import KMeans
+wcss=[]
+for i in range (1,11):
+kmeans=KMeans (n_clusters= i, init="k-means++")
+kmeans.fit(data.iloc[:,3:])
+wcss.append(kmeans.inertia_)
+plt.plot(range(1,11),wcss)
+plt.xlabel("no of cluster")
+plt.ylabel("wcss")
+plt.title("Elbow Method")
+km=KMeans(n_clusters=5)
+km.fit(data.iloc[:,3:])
+y_pred= km.predict(data.iloc[:,3:])
+y_pred
+data["cluster"]=y_pred
+df0=data[data["cluster"]==0]
+df1=data[data["cluster"]==1]
+df2=data[data["cluster"]==2]
+df3=data[data["cluster"]==3]
+df4=data[data["cluster"]==4]
+plt.scatter(df0["Annual Income (k$)"],df0["Spending Score (1-100)"],c="red",label="cluste
+plt.scatter(df1["Annual Income (k$)"],df1["Spending Score (1-100)"],c="pink",label="clust
+plt.scatter(df2["Annual Income (k$)"],df2["Spending Score (1-100)"],c="blue",label="clust
+plt.scatter(df3["Annual Income (k$)"],df3["Spending Score (1-100)"],c="green",label="clu
+plt.scatter(df4["Annual Income (k$)"],df4["Spending Score (1-100)"],c="black",label="clu
+plt.legend()
+plt.title("Customer Segments")
 ```
 
 ## Output:
-![K Means Clustering for Customer Segmentation](sam.png)
+![output1](https://github.com/user-attachments/assets/7537d44b-326d-4c9a-8821-af112e422876)
+![output2](https://github.com/user-attachments/assets/a0c9b30c-92a3-4826-a54a-a52423182c46)
+![output3](https://github.com/user-attachments/assets/2d5941b5-8f64-47b6-9495-07f87a850247)
+
 
 
 ## Result:
